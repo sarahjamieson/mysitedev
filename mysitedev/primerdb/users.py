@@ -3,12 +3,6 @@ import os
 import django
 os.environ['DJANGO_SETTINGS_MODULE'] = 'mysite.settings'
 django.setup()
+from django.contrib.auth.models import User
 
-user = authenticate(username='shjn', password='shjn00')
-if user is not None:
-    if user.is_active:
-        print "User valid, active and authenticated."
-    else:
-        print "Password valid but account has been disabled."
-else:
-    print "Username and password incorrect."
+print User.objects.filter(is_superuser=True)

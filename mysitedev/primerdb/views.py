@@ -133,6 +133,8 @@ def upload_file(request):
         :param request: HttpRequest object to link to page.
         :return: HttpResponse if successfully uploaded, remains on page if not.
     """
+    success = False
+    error = False
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)  # Passed to form's constructor to bind data to form.
         if form.is_valid():
@@ -147,11 +149,11 @@ def upload_file(request):
             if change == "Data updated." or change == "New gene added.":
                 info = "Successfully uploaded file %s. %s" % (filepath, change)
                 audit.add_to_log(current_time, info, username, archived_filename)
-                return HttpResponse("Primers successfully added to database.")
+                success = True
             else:
                 info = "Failed to upload file: errors in data"
                 audit.add_to_log(current_time, info, username, archived_filename)
-                return render(request, 'primerdb/errors.html', {'errors': change})
+                error = change
         else:
             # Records activity in audit log.
             current_time = datetime.datetime.utcnow()
@@ -161,7 +163,7 @@ def upload_file(request):
             audit.add_to_log(current_time, info, username, None)
     else:
         form = UploadFileForm()
-    return render(request, 'primerdb/upload.html', {'form': form})
+    return render(request, 'primerdb/upload.html', {'form': form, 'success': success, 'error': error})
 
 
 def excel_to_db(excel_file):

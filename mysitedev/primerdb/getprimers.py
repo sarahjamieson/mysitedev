@@ -274,7 +274,8 @@ class GetPrimers(object):
                 writer = ExcelWriter('%s.xlsx' % archived_filename)
                 df_sql.to_excel(writer, '%s' % today_date, index=False)
                 writer.save()
-
+                os.system("mv /home/cuser/PycharmProjects/django_apps/mysite/%s "
+                          "/home/cuser/PycharmProjects/django_apps/mysite/primerdb/archived_files/")
                 curs.execute("DELETE FROM Primers WHERE Gene='%s'" % gene_name)
                 curs.execute("DELETE FROM Genes WHERE Gene='%s'" % gene_name)
                 curs.execute("DELETE FROM SNPs WHERE Gene='%s'" % gene_name)

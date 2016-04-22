@@ -18,8 +18,28 @@
     <p>Genes currently in database:</p>
         <ul>
             {% for gene in genes %}
-            <li>{{ gene.gene }}</li>
+            <li><span>{{ gene.gene }}</span></li>
             {% endfor %}
         </ul>
+    <style type="text/css" scoped>
+        h1{
+            font-family: Cambria;
+            border-bottom: 5px solid;
+            border-color: #C2DFFF;
+        }
+        p{
+            font-family: Cambria;
+        }
+        ul{
+            font-family: Cambria;
+            list-style-type: square;
+        }
+        li{
+            color: #4863A0;
+        }
+        li span{
+            color: black;
+        }
+    </style>
 </body>
 </html>
