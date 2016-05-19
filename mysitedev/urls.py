@@ -17,4 +17,5 @@ from django.conf.urls import url, include
 
 urlpatterns = [
     url(r'^primerdatabase/', include('primerdb.urls')),
+    url(r'^genesearch/', include('genesearch.urls')),
 ]

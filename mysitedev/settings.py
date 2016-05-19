@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_tables2',
     'primerdb',
     'simple_history',
+    'genesearch',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -57,7 +58,7 @@ MIDDLEWARE_CLASSES = [
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-ROOT_URLCONF = 'mysite.urls'
+ROOT_URLCONF = 'mysitedev.urls'
 
 TEMPLATES = [
     {
@@ -76,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mysite.wsgi.application'
+WSGI_APPLICATION = 'mysitedev.wsgi.application'
 
 
 # Database
