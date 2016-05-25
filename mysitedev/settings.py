@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'primerdb',
     'simple_history',
     'genesearch',
+    'pipeline',
 ]
 
 MIDDLEWARE_CLASSES = [

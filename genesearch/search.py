@@ -60,3 +60,5 @@ class GeneSearch(object):
         protein = uni_transcript[1]
 
         return transcript, protein
+
+

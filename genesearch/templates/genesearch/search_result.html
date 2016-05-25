@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Search result</title>
-    <p>{{ gene }}</p>
-    <p>{{ ensg }}</p>
-    <p>{{ lrg }}</p>
-    <p>{{ refseq }}</p>
-    <p>{{ transcript }}</p>
-    <p>{{ protein }}</p>
+    <p>Search: {{ gene }}, {{ refseq }}.</p>
+    <p>------------------------------------------------------</p>
+    <p>Locus Reference Genomic identifier: <a href="http://ftp.ebi.ac.uk/pub/databases/lrgex/{{ lrg }}.xml">{{ lrg }}</a></p>
+    <p>Ensembl identifiers:</p>
+    <ul>
+        <li>{{ ensg }}</li>
+        <li>{{ transcript }}</li>
+        <li>{{ protein }}</li>
+    </ul>
+
 </head>
 <body>
 
