@@ -88,6 +88,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'primers.db.sqlite3'),
+    },
+    'pipeline': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'amlpipeline.db.sqlite3'),
     }
 }
 

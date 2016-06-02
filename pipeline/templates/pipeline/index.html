@@ -35,24 +35,40 @@
         <table>
             <tr>
                 <th bgcolor="#4863A0" style="color:#FFFFFF"><b>SAMPLE</b></th>
+                <th bgcolor="#4863A0" style="color:#FFFFFF"><b>CALLER</b></th>
                 <th bgcolor="#4863A0" style="color:#FFFFFF"><b>CHROM</b></th>
                 <th bgcolor="#4863A0" style="color:#FFFFFF"><b>POS</b></th>
                 <th bgcolor="#4863A0" style="color:#FFFFFF"><b>REF</b></th>
                 <th bgcolor="#4863A0" style="color:#FFFFFF"><b>ALT</b></th>
+                <th bgcolor="#4863A0" style="color:#FFFFFF"><b>END</b></th>
                 <th bgcolor="#4863A0" style="color:#FFFFFF"><b>TYPE</b></th>
-                <th bgcolor="#4863A0" style="color:#FFFFFF"><b>GQ</b></th>
+                <th bgcolor="#4863A0" style="color:#FFFFFF"><b>SIZE</b></th>
+                <th bgcolor="#4863A0" style="color:#FFFFFF"><b>GT</b></th>
+                <th bgcolor="#4863A0" style="color:#FFFFFF"><b>DEPTH</b></th>
+                <th bgcolor="#4863A0" style="color:#FFFFFF"><b>AD</b></th>
+                <th bgcolor="#4863A0" style="color:#FFFFFF"><b>AB</b></th>
                 <th bgcolor="#4863A0" style="color:#FFFFFF"><b>GENE</b></th>
+                <th bgcolor="#4863A0" style="color:#FFFFFF"><b>FUNC.REFGENE</b></th>
+                <th bgcolor="#4863A0" style="color:#FFFFFF"><b>EXONICFUNC.REFGENE</b></th>
             </tr>
             {% for row in results.rows %}
             <tr>
                 <td align="center">{{ row.sample }}</td>
+                <td align="center">{{ row.caller }}</td>
                 <td align="center">{{ row.chr }}</td>
                 <td align="center">{{ row.pos }}</td>
                 <td align="center">{{ row.ref }}</td>
                 <td align="center">{{ row.alt }}</td>
+                <td align="center">{{ row.end }}</td>
                 <td align="center">{{ row.type }}</td>
-                <td align="center">{{ row.gq }}</td>
+                <td align="center">{{ row.size }}</td>
+                <td align="center">{{ row.gt }}</td>
+                <td align="center">{{ row.depth }}</td>
+                <td align="center">{{ row.ad }}</td>
+                <td align="center">{{ row.ab }}</td>
                 <td align="center">{{ row.gene }}</td>
+                <td align="center">{{ row.func }}</td>
+                <td align="center">{{ row.exonic_func }}</td>
             </tr>
             {% endfor %}
         </table>
