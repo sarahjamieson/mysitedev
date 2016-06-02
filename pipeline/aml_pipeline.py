@@ -2,20 +2,16 @@ import vcf
 import sqlite3 as lite
 
 
-def random_function():
-    vcf_reader = vcf.Reader(open('04-.annovar.vcf', 'r'))
-    sample_no = vcf_reader.samples
+def get_output(vcf_file):
+    vcf_reader = vcf.Reader(open(vcf_file, 'r'))
+    sample_no = vcf_reader.samples[0]
 
-    con = lite.connect('amlpipeline.db.sqlite3')
+    con = lite.connect('/home/cuser/PycharmProjects/django_apps/mysitedev/primers.db.sqlite3')
     curs = con.cursor()
-    '''
+    curs.execute("DROP TABLE IF EXISTS Results")
     curs.execute("CREATE TABLE IF NOT EXISTS Results(sample_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, sample TEXT,"
                  " caller TEXT, chr TEXT, pos INTEGER, ref TEXT, alt TEXT, end_pos INTEGER, sv_type TEXT, size INTEGER,"
                  " gt TEXT, total_reads INTEGER, ad TEXT, ab INTEGER, gene TEXT, func TEXT, exonic_func TEXT)")
-    '''
-    curs.execute("DROP TABLE IF EXISTS Results")
-    curs.execute("CREATE TABLE IF NOT EXISTS Results(sample_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, sample TEXT,"
-                 " caller TEXT)")
 
     for record in vcf_reader:
         for sample in record:
@@ -42,14 +38,9 @@ def random_function():
                 ab = int(0)
             size = info_dict.get("SVLEN")
             ad_str = '%s,%s' % (str(ref_reads), str(alt_reads))
-            '''
-            curs.execute("INSERT INTO Results (sample, caller, chr, pos, ref, alt, end_pos, sv_type, size, gt, "
-                         "total_reads, ad, ab, gene, func, exonic_func) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
-                         "?, ?, ?)", (sample_no, 'Pindel', chr, pos, ref, alt, end_pos, sv_type, size, gt, total_reads,
-                                      ad_str, ab, gene, func, exonic_func,))
-            '''
-            caller = 'Pindel'
-            curs.execute("INSERT INTO Results (sample, caller) VALUES (?, ?)", (sample_no[0], 'Pindel'))
-            con.commit()
 
-random_function()
+            curs.execute("INSERT INTO Results (sample, caller, chr, pos, ref, alt, end_pos, sv_type, size, gt, "
+                         "total_reads, ad, ab, gene, func, exonic_func) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                         (sample_no, 'Pindel', chr, pos, ref, alt, end_pos, sv_type, size, gt, total_reads, ad_str,
+                          ab, gene, func, exonic_func))
+            con.commit()
