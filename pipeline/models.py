@@ -6,6 +6,7 @@ import django_tables2 as table
 
 class Results(models.Model):
     sample_id = models.AutoField(primary_key=True, unique=True)
+    run = models.CharField(max_length=100, default='')
     sample = models.CharField(max_length=30)
     caller = models.CharField(max_length=10)
     chr = models.CharField(max_length=6)

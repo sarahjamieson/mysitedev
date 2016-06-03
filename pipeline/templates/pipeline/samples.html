@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p align="right"><a href="/pipeline/">Home</a>
+    {% if samples %}
+        <p>Choose run to view samples:</p>
+        <ol>
+            {% for sample in samples %}
+            <li><a href="/pipeline/results/{{ sample.sample }}">{{ sample.sample }}</a></li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>No samples available.</p>
+    {% endif %}
+</body>
+</html>
