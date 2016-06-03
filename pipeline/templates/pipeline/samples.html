@@ -5,9 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-    <p align="right"><a href="/pipeline/">Home</a>
+    <p align="right"><a href="/pipeline/">Home</a></p>
+    <p>Run: {{ run }}</p>
     {% if samples %}
-        <p>Choose run to view samples:</p>
+        <p>Choose sample to view results:</p>
         <ol>
             {% for sample in samples %}
             <li><a href="/pipeline/results/{{ sample.sample }}">{{ sample.sample }}</a></li>

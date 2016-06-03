@@ -22,9 +22,9 @@ def get_samples(request, run):
         if item.sample not in item_ids:
             items.append(item)
             item_ids.append(item.sample)
-    return render(request, 'pipeline/samples.html', {'samples': items})
+    return render(request, 'pipeline/samples.html', {'samples': items, 'run': run})
 
 
 def get_results(request, sample):
     result = ResultTable(Results.objects.filter(sample__icontains=sample))
-    return render(request, 'pipeline/results.html', {'results': result})
+    return render(request, 'pipeline/results.html', {'results': result, 'sample': sample})

@@ -1,15 +1,19 @@
 import vcf
 import sqlite3 as lite
+from parse_sample_sheet import ParseSampleSheet
+import re
 
 
 def get_output(vcf_file):
     vcf_reader = vcf.Reader(open(vcf_file, 'r'))
+    parse_sheet = ParseSampleSheet('sf_sarah_share/160513_M04103_0019_000000000-ANU1A/SampleSheet.csv')
+    run_dict, sample_dict = parse_sheet.parse_sample_sheet()
+    run = run_dict.get('worksheet')
+
     sample_no = vcf_reader.samples[0]
-    run = 'run2'
 
     con = lite.connect('/home/cuser/PycharmProjects/django_apps/mysitedev/primers.db.sqlite3')
     curs = con.cursor()
-    curs.execute("DROP TABLE IF EXISTS Results")
     curs.execute("CREATE TABLE IF NOT EXISTS Results(sample_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, run TEXT, "
                  "sample TEXT, caller TEXT, chr TEXT, pos INTEGER, ref TEXT, alt TEXT, end_pos INTEGER, sv_type TEXT, "
                  "size INTEGER, gt TEXT, total_reads INTEGER, ad TEXT, ab INTEGER, gene TEXT, func TEXT, "
@@ -40,12 +44,15 @@ def get_output(vcf_file):
                 ab = int(0)
             size = info_dict.get("SVLEN")
             ad_str = '%s,%s' % (str(ref_reads), str(alt_reads))
-            if func == 'exonic' or func == 'splicing':
+            if re.match("(.*)exonic(.*)", func) or re.match("(.*)splicing(.*)", func):
                 curs.execute(
                     "INSERT INTO Results (sample, run, caller, chr, pos, ref, alt, end_pos, sv_type, size, gt, "
                     "total_reads, ad, ab, gene, func, exonic_func) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                    (sample_no, run, 'Pindel', chr, pos, ref, alt, end_pos, sv_type, size, gt, total_reads, ad_str,
+                    (sample_no, run, 'Pindel', chr, pos, ref, alt, end_pos, sv_type, abs(size), gt, total_reads, ad_str,
                      ab, gene, func, exonic_func))
                 con.commit()
             else:
                 pass
+
+get_output('sf_sarah_share/04-D15-22373-HT-Nextera-Myeloid-Val1-Repeat_S4_L001_.annovar.vcf')
+# get_output('sf_sarah_share/02-D15-18331-AR-Nextera-Myeloid-Val1-Repeat_S2_L001_.annovar.vcf')

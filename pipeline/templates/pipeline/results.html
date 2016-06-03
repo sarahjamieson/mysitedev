@@ -2,40 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Results</title>
 </head>
 <body>
-    {% if results %}
-    <style type="text/css" scoped>
-        table{
-            width: 100%;
-            font-family: Calibri;
-            border: 1px solid;
-            border-color:#4863A0;
-            border-collapse: collapse;
-        }
-        table td{
-            border: 1px solid;
-            border-color:#4863A0;
-            word-wrap: break-word;
-            max-width: 150px;
-        }
-        table th{
-            border: 1px solid;
-            border-color:#4863A0;
-            word-wrap: break-word;
-            max-width: 150px;
-        }
-        h1{
-            font-family: Cambria;
-            border-bottom: 5px solid;
-            border-color: #C2DFFF;
-        }
-        p{
-            font-family: Cambria;
-        }
-    </style>
     <p align="right"><a href="/pipeline/">Home</a></p>
+    <p>Sample searched for: {{ sample }}</p>
+    {% if results %}
+        <style type="text/css" scoped>
+            table{
+                width: 100%;
+                font-family: Calibri;
+                border: 1px solid;
+                border-color:#4863A0;
+                border-collapse: collapse;
+            }
+            table td{
+                border: 1px solid;
+                border-color:#4863A0;
+                word-wrap: break-word;
+                max-width: 150px;
+            }
+            table th{
+                border: 1px solid;
+                border-color:#4863A0;
+                word-wrap: break-word;
+                max-width: 150px;
+            }
+            h1{
+                font-family: Cambria;
+                border-bottom: 5px solid;
+                border-color: #C2DFFF;
+            }
+            p{
+                font-family: Cambria;
+            }
+        </style>
         <table>
             <tr>
                 <th bgcolor="#4863A0" style="color:#FFFFFF"><b>SAMPLE</b></th>
